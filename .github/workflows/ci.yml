@@ -1,4 +1,4 @@
-name: Check source mod
+name: Native mod
 on: [push, pull_request]
 jobs:
   check:
@@ -7,18 +7,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo fmt --check
-      - run: rustfmt --edition 2024 --check mixins/*/runtime.rs
-      - run: cargo clippy --all-targets -- -D warnings
-      - run: cargo test
-      - name: Check source integration
-        run: |
-          curl -fL https://raw.githubusercontent.com/jao-lukx/minecraft-rust-offline/main/downloads/horizon-offline-profiles-source.zip -o "$RUNNER_TEMP/horizon.zip"
-          unzip -q "$RUNNER_TEMP/horizon.zip" -d "$RUNNER_TEMP/horizon"
-          python3 tools/test_install.py "$RUNNER_TEMP/horizon/horizon-offline-profiles"
-          python3 tools/install.py "$RUNNER_TEMP/horizon/horizon-offline-profiles"
-          cargo check --locked --no-default-features --manifest-path "$RUNNER_TEMP/horizon/horizon-offline-profiles/Cargo.toml" -p horizon-client --bin horizon-client
+      - run: rustfmt --edition 2024 --check native/*/*.rs
+      - run: cargo test --locked
+      - run: cargo clippy --locked --all-targets -- -D warnings
       - run: python3 tools/package.py
+      - name: Check native integration
+        run: |
+          curl -fL https://raw.githubusercontent.com/jao-lukx/minecraft-rust-offline/main/downloads/horizon-offline-dropin-source.zip -o "$RUNNER_TEMP/source.zip"
+          unzip -q "$RUNNER_TEMP/source.zip" -d "$RUNNER_TEMP/source"
+          cargo install --git https://github.com/horizon-rust/horizon-mixins --rev d9c83d7096b7ea5b83678da2efdfd6161f74997e --locked horizon-mixins-cli
+          horizon-mixins apply --workspace "$RUNNER_TEMP/source/horizon-offline-profiles" --mods "$PWD/native" --out "$RUNNER_TEMP/stage"
+          cargo check --locked --no-default-features --manifest-path "$RUNNER_TEMP/stage/Cargo.toml" -p horizon-client --bin horizon-client
       - uses: actions/upload-artifact@v4
         with:
-          name: source-mod
-          path: target/*-source.zip
+          name: native-mod
+          path: target/*.hnmod

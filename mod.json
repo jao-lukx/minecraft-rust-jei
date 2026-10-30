@@ -2,6 +2,7 @@
   "id": "rust_jei",
   "name": "JEI Rust",
   "description": "Lista de itens, busca e receitas/usos com R e U.",
-  "version": "0.1.0",
-  "horizon": "e4472a7423da0740c881132d61e8e9b368bfef4c"
+  "version": "0.2.0",
+  "horizon": "e4472a7423da0740c881132d61e8e9b368bfef4c",
+  "format": "hnmod"
 }

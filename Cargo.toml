@@ -1,8 +1,8 @@
 [package]
 name = "rust_jei"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 license = "MIT"
 
 [lib]
-path = "mixins/rust_jei/core.rs"
+path = "native/rust_jei/core.rs"

@@ -14,7 +14,7 @@ impl Game<'_> {
     pub(super) fn rust_jei_list(&mut self, mods: &mut Vec<NativeMod>) {
         mods.push(NativeMod {
             id: ID.into(),
-            title: "JEI Rust 0.1.0".into(),
+            title: "JEI Rust 0.2.0".into(),
             description: "Busca, receitas (R), usos (U) e preenchimento de receitas conhecidas."
                 .into(),
             keys: vec![

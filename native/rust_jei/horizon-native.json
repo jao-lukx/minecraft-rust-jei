@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "id": "rust_jei",
+  "version": "0.2.0",
+  "game": "26.3",
+  "horizon": "e4472a7423da0740c881132d61e8e9b368bfef4c",
+  "mixins": "d9c83d7096b7ea5b83678da2efdfd6161f74997e"
+}
