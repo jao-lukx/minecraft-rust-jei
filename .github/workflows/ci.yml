@@ -1,0 +1,24 @@
+name: Check source mod
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo fmt --check
+      - run: rustfmt --edition 2024 --check mixins/*/runtime.rs
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test
+      - name: Check source integration
+        run: |
+          curl -fL https://raw.githubusercontent.com/jao-lukx/minecraft-rust-offline/main/downloads/horizon-offline-profiles-source.zip -o "$RUNNER_TEMP/horizon.zip"
+          unzip -q "$RUNNER_TEMP/horizon.zip" -d "$RUNNER_TEMP/horizon"
+          python3 tools/test_install.py "$RUNNER_TEMP/horizon/horizon-offline-profiles"
+          python3 tools/install.py "$RUNNER_TEMP/horizon/horizon-offline-profiles"
+          cargo check --locked --no-default-features --manifest-path "$RUNNER_TEMP/horizon/horizon-offline-profiles/Cargo.toml" -p horizon-client --bin horizon-client
+      - run: python3 tools/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-mod
+          path: target/*-source.zip

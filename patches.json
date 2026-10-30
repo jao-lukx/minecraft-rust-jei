@@ -1,0 +1,17 @@
+[
+  {
+    "path": "crates/horizon-client/src/game/native_hooks.rs",
+    "old": "pub(super) fn native_mods(&mut self, mods: &mut Vec<NativeMod>) {",
+    "new": "pub(super) fn native_mods(&mut self, mods: &mut Vec<NativeMod>) {\n        self.rust_jei_list(mods);"
+  },
+  {
+    "path": "crates/horizon-client/src/game/native_hooks.rs",
+    "old": "pub(super) fn native_frame(&mut self, elapsed: Duration) {",
+    "new": "pub(super) fn native_frame(&mut self, elapsed: Duration) {\n        self.rust_jei_frame();"
+  },
+  {
+    "path": "crates/horizon-client/src/game/native_hooks.rs",
+    "old": "pub(super) fn native_panel_event(&mut self, mod_id: &str, event: &NativePanelEvent) {",
+    "new": "pub(super) fn native_panel_event(&mut self, mod_id: &str, event: &NativePanelEvent) {\n        self.rust_jei_event(mod_id, event);"
+  }
+]
