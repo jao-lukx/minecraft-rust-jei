@@ -58,3 +58,7 @@ Inclui crafting, fornos, defumação, fogueira, corte de pedra, ferraria e poç�
 - [minecraft-rust-mouse-tweaks](https://github.com/jao-lukx/minecraft-rust-mouse-tweaks)
 - [minecraft-rust-sodium](https://github.com/jao-lukx/minecraft-rust-sodium)
 - [minecraft-rust-zoom](https://github.com/jao-lukx/minecraft-rust-zoom)
+
+## Download dos fontes
+
+[Baixar pacote 0.1.0](https://raw.githubusercontent.com/jao-lukx/minecraft-rust-jei/main/downloads/rust_jei-0.1.0-source.zip). Confira o SHA-256 em `downloads/SHA256SUMS`. Exige recompilar o cliente, conforme as instruções acima.
